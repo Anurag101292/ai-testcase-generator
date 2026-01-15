@@ -1,0 +1,8 @@
+[
+  {
+    "id": "DOC-1",
+    "jiraId": "ATG-123",
+    "title": "Login Design Specification",
+    "content": "Password must be at least 8 characters. Account locks after 5 failures. Session expires after 30 minutes."
+  }
+]

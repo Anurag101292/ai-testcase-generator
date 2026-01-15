@@ -1,0 +1,12 @@
+[
+  {
+    "id": "ATG-123",
+    "title": "Implement login using email and password",
+    "description": "User should be able to login using email and password. Password must be at least 8 characters.",
+    "acceptanceCriteria": [
+      "Valid email + password logs in",
+      "Invalid password shows error",
+      "Account locks after 5 failures"
+    ]
+  }
+]

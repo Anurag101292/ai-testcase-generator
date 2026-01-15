@@ -1,0 +1,8 @@
+[
+    {
+        "id": "COMMIT-1",
+        "jiraId": "PROJ-123",
+        "file": "auth.ts",
+        "diff": "if (password.length < 8) throw Error('Invalid password'); if (failedAttempts > 5) lockAccount();"
+    }
+]
