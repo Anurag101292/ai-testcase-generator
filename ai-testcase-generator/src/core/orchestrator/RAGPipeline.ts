@@ -1,12 +1,14 @@
 import { IngestionManager } from "../ingestion/IngestionManager";
 import { Cleaner } from "../preprocessing/Cleaner";
 import { Chunker } from "../chunking/Chunker";
-import { EmbeddingService } from "../embedding/EmbeddingService";
 import { LocalVectorStore } from "../vectordb/LocalVectorStore";
+import { EmbeddingFactory } from "../embedding/EmbeddingFactory";
+import { IEmbeddingProvider } from "../embedding/IEmbeddingProvider";
+import { VectorStoreFactory } from "../vectordb/VectorStoreFactory";
 
 export class RAGPipeline {
-  private vectorStore = new LocalVectorStore();
-  private embedder = new EmbeddingService();
+  private vectorStore = VectorStoreFactory.create();
+  private embedder: IEmbeddingProvider = EmbeddingFactory.create();
 
   async index() {
     const ingestion = new IngestionManager();
@@ -26,7 +28,9 @@ export class RAGPipeline {
     const chunks = await chunker.chunk(cleaned);
 
     const texts = chunks.map(c => c.content);
-    const vectors = await this.embedder.embed(texts);
+
+    // 🔥 This will use Google / OpenAI / Ollama depending on ENV
+    const vectors = await this.embedder.embedDocuments(texts);
 
     this.vectorStore.add(vectors, chunks);
 
